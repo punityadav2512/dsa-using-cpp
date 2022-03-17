@@ -6,32 +6,45 @@ class Node
 public:
     int data;
     Node *next;
-    Node(int d)
+    Node(int data)
     {
-        this->data = d;
+        this->data = data;
         this->next = NULL;
     }
-} *tail = NULL;
+};
 
-void insertAtHead(int d, Node *&head)
+void insertAtTail(int data, Node *&tail, Node *&head)
 {
+    // create new node
+    Node *temp = new Node(data);
+    if (head == NULL)
+    {
+        head = temp;
+    }
+    if (tail != NULL)
+    {
 
-    Node *node1 = new Node(d);
-    node1->next = head;
-    head = node1;
+        tail->next = temp;
+    }
+    tail = temp;
 }
 
-void insertAtTail(int d, Node *&tail)
+void insertAtHead(int data, Node *&head, Node *&tail)
 {
-    Node *temp = new Node(d);
-    tail->next = temp;
-    tail = temp;
+    // create new node
+    Node *temp = new Node(data);
+    temp->next = head;
+    head = temp;
+    if (tail == NULL)
+    {
+        tail = temp;
+    }
 }
 
 void print(Node *&head)
 {
     Node *temp = head;
-    while (temp != 0)
+    while (temp != NULL)
     {
         cout << temp->data << " ";
         temp = temp->next;
@@ -42,15 +55,19 @@ void print(Node *&head)
 int main()
 {
 
-    // Node *tail = NULL;
-    // insertAtHead(4, head);
-    // insertAtHead(5, head);
-    // insertAtHead(6, head);
-    // insertAtHead(7, head);
-    // print(head);
-    insertAtTail(3, tail);
-    insertAtTail(2, tail);
-    insertAtTail(1, tail);
+    Node *head = NULL;
+    Node *tail = NULL;
+    insertAtHead(3, head, tail);
+    print(head);
+    insertAtHead(5, head, tail);
+    print(head);
+    insertAtHead(7, head, tail);
+    print(head);
+    insertAtTail(3, tail, head);
+    print(head);
+    insertAtTail(5, tail, head);
+    print(head);
+    // insertAtTail(7, tail, head);
     // print(head);
 
     return 0;

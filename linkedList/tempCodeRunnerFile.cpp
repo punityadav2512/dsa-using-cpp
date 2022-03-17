@@ -1,5 +1,6 @@
-nsertAtHead(4, head);
+insertAtHead(3, head);
+    print(head);
     insertAtHead(5, head);
-    insertAtHead(6, head);
+    print(head);
     insertAtHead(7, head);
     print(head);
