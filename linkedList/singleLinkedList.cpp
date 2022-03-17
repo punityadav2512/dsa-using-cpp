@@ -13,6 +13,18 @@ public:
     }
 };
 
+void insertAtHead(int data, Node *&head, Node *&tail)
+{
+    // create new node
+    Node *temp = new Node(data);
+    temp->next = head;
+    head = temp;
+    if (tail == NULL)
+    {
+        tail = temp;
+    }
+}
+
 void insertAtTail(int data, Node *&tail, Node *&head)
 {
     // create new node
@@ -29,16 +41,43 @@ void insertAtTail(int data, Node *&tail, Node *&head)
     tail = temp;
 }
 
-void insertAtHead(int data, Node *&head, Node *&tail)
+void insertAtPosition(Node *&head, Node *&tail, int position, int data)
 {
-    // create new node
-    Node *temp = new Node(data);
-    temp->next = head;
-    head = temp;
-    if (tail == NULL)
+    Node *temp = head;
+    // create new node;
+    Node *temp1 = new Node(data);
+    int count = 1;
+    if (head == NULL && tail == NULL)
     {
-        tail = temp;
+        temp1->next = head;
+        head = temp1;
+        tail = temp1;
+        return;
     }
+
+    if (position == 1)
+    {
+        // temp1->next = temp;
+        // head = temp1;
+        // or
+        insertAtHead(data, head, tail);
+        return;
+    }
+
+    while (count < position - 1)
+    {
+        temp = temp->next;
+        count++;
+    }
+
+    // inserting at last
+    if (temp->next == NULL)
+    {
+        insertAtTail(data, tail, head);
+        return;
+    }
+    temp1->next = temp->next;
+    temp->next = temp1;
 }
 
 void print(Node *&head)
@@ -63,12 +102,20 @@ int main()
     print(head);
     insertAtHead(7, head, tail);
     print(head);
-    insertAtTail(3, tail, head);
+    insertAtTail(8, tail, head);
     print(head);
-    insertAtTail(5, tail, head);
-    print(head);
+    // insertAtTail(5, tail, head);
+    // print(head);
     // insertAtTail(7, tail, head);
     // print(head);
+    insertAtPosition(head, tail, 1, 6);
+    print(head);
+    insertAtPosition(head, tail, 3, 9);
+    print(head);
+    insertAtPosition(head, tail, 7, 9);
+    print(head);
+    insertAtTail(7, tail, head);
+    print(head);
 
     return 0;
 }
