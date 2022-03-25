@@ -70,6 +70,8 @@ int main()
 {
     Stack st(5);
     st.push(22);
+    st.push(23);
+    cout << st.peek() << endl;
     st.push(42);
     cout << st.peek() << endl;
     st.pop();
